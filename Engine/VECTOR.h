@@ -18,7 +18,7 @@ public:
 	VECTOR2D operator/(const double & scale) const;
 	VECTOR2D & operator=(const VECTOR2D & vec) = default;
 	
-	VECTOR2D Dot(const VECTOR2D & vecA, const VECTOR2D & vecB) const;
+	VECTOR2D Dot(const VECTOR2D & vecB) const;
 
 	double getX() const ;
 	double getY() const ;

@@ -27,9 +27,9 @@ VECTOR2D VECTOR2D::operator/(const double & scale) const
 	return VECTOR2D((m_Vx/scale), (m_Vy/scale));
 }
 
-VECTOR2D VECTOR2D::Dot(const VECTOR2D & a, const VECTOR2D & b) const
+VECTOR2D VECTOR2D::Dot(const VECTOR2D & b) const
 {
-	return VECTOR2D((a.m_Vx * b.m_Vx), (a.m_Vy * b.m_Vy));
+	return VECTOR2D((m_Vx * b.m_Vx), (m_Vy * b.m_Vy));
 }
 
 double VECTOR2D::getX() const
