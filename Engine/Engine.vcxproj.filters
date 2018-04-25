@@ -60,6 +60,12 @@
     <ClInclude Include="VECTOR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RENDERER.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MAP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -90,6 +96,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VECTOR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RENDERER.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MAP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
