@@ -49,6 +49,7 @@ Game::Game( MainWindow& wnd )
 	floorLayout += L"################";
 	m_map = MAP(floorLayout, dim);
 	tp1 = tp2 = std::chrono::system_clock::now();
+	mouseX = 0;
 }
 
 void Game::Go()
@@ -66,6 +67,25 @@ void Game::Go()
 
 void Game::UpdateModel(double timePassed)
 {
+	double val = 1;
+	tempX = wnd.mouse.GetPosX();
+	
+	int dir = 0;
+	dir = tempX - mouseX;
+	mouseX = tempX;
+
+	if (dir)
+	{
+		if (dir < 0)
+		{
+			m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, (abs(dir)/val) * timePassed);
+		}
+		else if (dir > 0)
+		{
+			m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT,(abs(dir)/val) * timePassed);
+		}
+	}
+
 	if (wnd.kbd.KeyIsPressed('A'))
 	{
 		m_player.moveStep(RENDERER::Movement::STRAFE_LEFT, timePassed);

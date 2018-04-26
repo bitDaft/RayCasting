@@ -50,6 +50,9 @@ private:
 	/*  User Variables              */
 	MAP m_map;
 	RENDERER m_player;
+	int mouseX;
+	int tempX;
+	RECT rr;
 
 	std::chrono::system_clock::time_point tp1;
 	std::chrono::system_clock::time_point tp2;

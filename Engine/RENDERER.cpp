@@ -53,6 +53,10 @@ void RENDERER::moveStep(Movement mov, double frameTime)
 	{
 		m_viewAngle -= 2 * pi;
 	}
+	else if (m_viewAngle <= -(2 * pi))
+	{
+		m_viewAngle += 2 * pi;
+	}
 }
 
 void RENDERER::render(Graphics & gfx)
@@ -70,7 +74,7 @@ void RENDERER::render(Graphics & gfx)
 		bool hitWall = false;
 		double distance = 0.0;
 
-		while (!hitWall && distance < 16.0)
+		while (!hitWall)
 		{
 			distance += stepSize;
 			VECTOR2D Ray = uRay * distance;
@@ -91,11 +95,13 @@ void RENDERER::render(Graphics & gfx)
 			{
 				gfx.PutPixel(x, y, Colors::Black);
 			}
-			else if (y <= floorStart)
+			else if (y <= floorStart )
 			{
-				unsigned char pp = 255;//std::min(255,int((255 / distance) * 0.5));
+				
+					unsigned char pp = std::min(255,int((255 / distance) * 5));
 
-				gfx.PutPixel(x, y, Colors::MakeRGB(pp, pp, pp));
+					gfx.PutPixel(x, y, Colors::MakeRGB(pp, pp, pp));
+				
 			}
 			else
 			{
@@ -106,7 +112,7 @@ void RENDERER::render(Graphics & gfx)
 }
 
 RENDERER::RENDERER(MAP & map)
-	:m_pos(8.0,8.0),m_velMovement(5.0),m_level(map),m_viewAngle(0.0),m_FOV(40*(pi / 180)),m_velRotate(5.0)
+	:m_pos(8.0,8.0),m_velMovement(3.2),m_level(map),m_viewAngle(0.0),m_FOV(40*(pi / 180)),m_velRotate(1.0)
 {
 }
 
