@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Graphics.h"
+
 #include "VECTOR.h"
 #include "MAP.h"
 
@@ -18,21 +20,23 @@ public:
 	};
 private:
 	VECTOR2D m_pos;
-	VECTOR2D m_velMovement;
+	double m_velMovement;
+	double m_velRotate;
 	
 	double m_viewAngle;
 	double m_FOV;
 
-	MAP m_level;
+	const MAP& m_level;
 
 public:
 
 	bool DrawMap = false;
 
 	void moveStep(Movement mov,double frameTime);
-	void render();
+	void render(Graphics& gfx);
 
-	RENDERER();
+	RENDERER() = delete;
+	RENDERER(MAP& map);
 	~RENDERER();
 };
 

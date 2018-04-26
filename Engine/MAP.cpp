@@ -2,7 +2,7 @@
 
 #include <assert.h>
 
-char MAP::getMapPosChar(int x, int y)
+wchar_t MAP::getMapPosChar(int x, int y) const
 {
 	assert(x < m_mapDimension && x >= 0);
 	assert(y < m_mapDimension && y >= 0);

@@ -25,10 +25,11 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	m_player(m_map)
 {
 	std::wstring floorLayout;
-	int dim = 16;
+	const int dim = 16;
 
 	floorLayout += L"################";
 	floorLayout += L"#..............#";
@@ -47,21 +48,43 @@ Game::Game( MainWindow& wnd )
 	floorLayout += L"#..............#";
 	floorLayout += L"################";
 	m_map = MAP(floorLayout, dim);
-
+	tp1 = tp2 = std::chrono::system_clock::now();
 }
 
 void Game::Go()
 {
+	tp2 = std::chrono::system_clock::now();
+	std::chrono::duration<double> elt = tp2 - tp1;
+	tp1 = tp2;
+
 	gfx.BeginFrame();	
-	UpdateModel();
+	UpdateModel(elt.count());
 	ComposeFrame();
 	gfx.EndFrame();
+
 }
 
-void Game::UpdateModel()
+void Game::UpdateModel(double timePassed)
 {
+	if (wnd.kbd.KeyIsPressed('A'))
+	{
+		m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, timePassed);
+	}
+	if (wnd.kbd.KeyIsPressed('D'))
+	{
+		m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT, timePassed);
+	}
+	if (wnd.kbd.KeyIsPressed('W'))
+	{
+		m_player.moveStep(RENDERER::Movement::FORWARD, timePassed);
+	}
+	if (wnd.kbd.KeyIsPressed('S'))
+	{
+		m_player.moveStep(RENDERER::Movement::BACKWARD, timePassed);
+	}
 }
 
 void Game::ComposeFrame()
 {
+	m_player.render(gfx);
 }

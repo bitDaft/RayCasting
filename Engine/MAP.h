@@ -14,7 +14,7 @@ private:
 
 public:
 
-	char getMapPosChar(int x,int y); // integral coords of the map - m_map[x][y]
+	wchar_t getMapPosChar(int x,int y) const; // integral coords of the map - m_map[x][y]
 
 	//TODO : implement this function
 	//void Draw(int x,int y); //Pixel location on screen

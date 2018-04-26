@@ -27,7 +27,7 @@ public:
 
 	VECTOR2D() = delete;
 	VECTOR2D(const VECTOR2D &) = default;
-	VECTOR2D(const double &, const double &);
+	VECTOR2D(const double & X, const double & Y);
 	~VECTOR2D();
 };
 

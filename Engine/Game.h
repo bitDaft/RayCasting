@@ -25,6 +25,9 @@
 #include "Graphics.h"
 
 #include "MAP.h"
+#include "RENDERER.h"
+
+#include <chrono>
 
 
 class Game
@@ -36,7 +39,7 @@ public:
 	void Go();
 private:
 	void ComposeFrame();
-	void UpdateModel();
+	void UpdateModel(double);
 	/********************************/
 	/*  User Functions              */
 	/********************************/
@@ -46,5 +49,9 @@ private:
 	/********************************/
 	/*  User Variables              */
 	MAP m_map;
+	RENDERER m_player;
+
+	std::chrono::system_clock::time_point tp1;
+	std::chrono::system_clock::time_point tp2;
 	/********************************/
 };
