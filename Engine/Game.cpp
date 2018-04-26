@@ -41,24 +41,24 @@ Game::Game( MainWindow& wnd )
 	floorLayout += L"#..........#..........#........#";
 	floorLayout += L"#..............................#";
 	floorLayout += L"#..............................#";
-	floorLayout += L"#.................###########..#";
+	floorLayout += L"#.................##############";
 	floorLayout += L"#..............................#";
 	floorLayout += L"#..............................#";
 	floorLayout += L"#..............................#";
-	floorLayout += L"#..............................#";
-	floorLayout += L"#..............................#";
-	floorLayout += L"#.#########....................#";
-	floorLayout += L"#..............................#";
-	floorLayout += L"#..............................#";
+	floorLayout += L"#......................##......#";
+	floorLayout += L"#......................##......#";
+	floorLayout += L"###########....................#";
+	floorLayout += L"#.........#....................#";
+	floorLayout += L"#.........#....................#";
+	floorLayout += L"#.........#..............##....#";
+	floorLayout += L"#.........#..............##....#";
+	floorLayout += L"#.........#..............##....#";
 	floorLayout += L"#........................##....#";
+	floorLayout += L"#.................###....##....#";
+	floorLayout += L"#.................###....##....#";
+	floorLayout += L"#.................###....##....#";
 	floorLayout += L"#........................##....#";
-	floorLayout += L"#........................##....#";
-	floorLayout += L"#........................##....#";
-	floorLayout += L"#......#######...........##....#";
-	floorLayout += L"#......#######...........##....#";
-	floorLayout += L"#......#######...........##....#";
-	floorLayout += L"#......#######...........##....#";
-	floorLayout += L"#......#######...........##....#";
+	floorLayout += L"#.......###################....#";
 	floorLayout += L"#........................##....#";
 	floorLayout += L"#........................##....#";
 	floorLayout += L"#........................##....#";
@@ -141,14 +141,11 @@ void Game::UpdateModel(double timePassed)
 	{
 		m_player.moveStep(RENDERER::Movement::BACKWARD, timePassed);
 	}
-	if (wnd.kbd.KeyIsPressed('Q'))
+	if (wnd.kbd.KeyIsPressed('O'))
 	{
-		m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, timePassed);
+		wnd.Kill();
 	}
-	if (wnd.kbd.KeyIsPressed('E'))
-	{
-		m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT, timePassed);
-	}
+	
 }
 
 void Game::ComposeFrame()
