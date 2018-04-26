@@ -32,6 +32,22 @@ void RENDERER::moveStep(Movement mov, double frameTime)
 
 		break;
 		}
+	case Movement::STRAFE_LEFT: {
+		VECTOR2D temp = ((VECTOR2D(-sin(m_viewAngle), cos(m_viewAngle)) * m_velMovement) * frameTime);
+		m_pos = m_pos + temp;
+		if (m_level.getMapPosChar((int)m_pos.getX(), (int)m_pos.getY()) == L'#')
+			m_pos = m_pos - temp;
+
+		break;
+		}
+	case Movement::STRAFE_RIGHT: {
+		VECTOR2D temp = ((VECTOR2D(sin(m_viewAngle), -cos(m_viewAngle)) * m_velMovement) * frameTime);
+		m_pos = m_pos + temp;
+		if (m_level.getMapPosChar((int)m_pos.getX(), (int)m_pos.getY()) == L'#')
+			m_pos = m_pos - temp;
+
+		break;
+		}
 	}
 	if (m_viewAngle >= 2 * pi)
 	{
@@ -43,7 +59,7 @@ void RENDERER::render(Graphics & gfx)
 {
 	double rayAngle = 0.0;
 	const double fovUnit = (m_FOV / double(Graphics::ScreenWidth));
-	const double stepSize = 0.01;
+	const double stepSize = 0.1;
 
 	for (int x = 0; x < Graphics::ScreenWidth; x++)
 	{

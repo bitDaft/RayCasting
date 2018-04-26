@@ -68,11 +68,11 @@ void Game::UpdateModel(double timePassed)
 {
 	if (wnd.kbd.KeyIsPressed('A'))
 	{
-		m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, timePassed);
+		m_player.moveStep(RENDERER::Movement::STRAFE_LEFT, timePassed);
 	}
 	if (wnd.kbd.KeyIsPressed('D'))
 	{
-		m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT, timePassed);
+		m_player.moveStep(RENDERER::Movement::STRAFE_RIGHT, timePassed);
 	}
 	if (wnd.kbd.KeyIsPressed('W'))
 	{
@@ -81,6 +81,14 @@ void Game::UpdateModel(double timePassed)
 	if (wnd.kbd.KeyIsPressed('S'))
 	{
 		m_player.moveStep(RENDERER::Movement::BACKWARD, timePassed);
+	}
+	if (wnd.kbd.KeyIsPressed('Q'))
+	{
+		m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, timePassed);
+	}
+	if (wnd.kbd.KeyIsPressed('E'))
+	{
+		m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT, timePassed);
 	}
 }
 
