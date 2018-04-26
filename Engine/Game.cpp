@@ -27,6 +27,27 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd )
 {
+	std::wstring floorLayout;
+	int dim = 16;
+
+	floorLayout += L"################";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#.....#........#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"#......#########";
+	floorLayout += L"#..............#";
+	floorLayout += L"#..............#";
+	floorLayout += L"################";
+	m_map = MAP(floorLayout, dim);
+
 }
 
 void Game::Go()

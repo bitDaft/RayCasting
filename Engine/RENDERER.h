@@ -1,6 +1,7 @@
 #pragma once
 
 #include "VECTOR.h"
+#include "MAP.h"
 
 class RENDERER
 {
@@ -19,9 +20,10 @@ private:
 	VECTOR2D m_pos;
 	VECTOR2D m_velMovement;
 	
-
 	double m_viewAngle;
 	double m_FOV;
+
+	MAP m_level;
 
 public:
 
