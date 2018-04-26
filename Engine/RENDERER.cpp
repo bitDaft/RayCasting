@@ -33,7 +33,7 @@ void RENDERER::moveStep(Movement mov, double frameTime)
 		break;
 		}
 	case Movement::STRAFE_LEFT: {
-		VECTOR2D temp = ((VECTOR2D(-sin(m_viewAngle), cos(m_viewAngle)) * m_velMovement) * frameTime);
+		VECTOR2D temp = ((VECTOR2D(sin(m_viewAngle), -cos(m_viewAngle)) * m_velMovement) * frameTime);
 		m_pos = m_pos + temp;
 		if (m_level.getMapPosChar((int)m_pos.getX(), (int)m_pos.getY()) == L'#')
 			m_pos = m_pos - temp;
@@ -41,7 +41,7 @@ void RENDERER::moveStep(Movement mov, double frameTime)
 		break;
 		}
 	case Movement::STRAFE_RIGHT: {
-		VECTOR2D temp = ((VECTOR2D(sin(m_viewAngle), -cos(m_viewAngle)) * m_velMovement) * frameTime);
+		VECTOR2D temp = ((VECTOR2D(-sin(m_viewAngle), cos(m_viewAngle)) * m_velMovement) * frameTime);
 		m_pos = m_pos + temp;
 		if (m_level.getMapPosChar((int)m_pos.getX(), (int)m_pos.getY()) == L'#')
 			m_pos = m_pos - temp;
@@ -93,7 +93,7 @@ void RENDERER::render(Graphics & gfx)
 			}
 			else if (y <= floorStart)
 			{
-				unsigned char pp = std::min(255,int((255 / distance) * 0.5));
+				unsigned char pp = 255;//std::min(255,int((255 / distance) * 0.5));
 
 				gfx.PutPixel(x, y, Colors::MakeRGB(pp, pp, pp));
 			}
