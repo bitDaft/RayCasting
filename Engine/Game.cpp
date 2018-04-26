@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include <assert.h>
 
 
 Game::Game( MainWindow& wnd )
@@ -66,6 +67,11 @@ Game::Game( MainWindow& wnd )
 	m_map = MAP(floorLayout, dim);
 	tp1 = tp2 = std::chrono::system_clock::now();
 	mouseX = 0;
+	hwnd = FindWindowW(NULL, L"FakeRay");
+	assert(hwnd != NULL);
+	pt.x = 1366 / 2;
+	pt.y = 768 / 2;
+	
 }
 
 void Game::Go()
@@ -83,25 +89,42 @@ void Game::Go()
 
 void Game::UpdateModel(double timePassed)
 {
-	double val = 1;
-	tempX = wnd.mouse.GetPosX();
-	
-	int dir = 0;
-	dir = tempX - mouseX;
-	mouseX = tempX;
 
-	if (dir)
+	if (captureMouse)
 	{
+		
+		double val = 2.0;
+		 
+		int dir = 0;
+		tempX = wnd.mouse.GetPosX();
+		tempY = wnd.mouse.GetPosY();
+		pt2.x = tempX;
+		pt2.y = tempY;
+		ClientToScreen(hwnd, &pt2);
+		
+		dir = pt2.x - pt.x;
+
 		if (dir < 0)
 		{
-			m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, (abs(dir)/val) * timePassed);
+			m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, (abs(dir) / val) * timePassed);
 		}
 		else if (dir > 0)
 		{
-			m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT,(abs(dir)/val) * timePassed);
+			m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT, (abs(dir) / val) * timePassed);
 		}
+		
+		SetCursorPos(pt.x, pt.y);
 	}
-
+	if (wnd.kbd.KeyIsPressed('P'))
+	{
+		captureMouse = !captureMouse;
+		tempX = wnd.mouse.GetPosX();
+		tempY = wnd.mouse.GetPosY();
+		pt.x = tempX;
+		pt.y = tempY;
+		ClientToScreen(hwnd, &pt);
+		SetCursorPos(pt.x, pt.y);		
+	}
 	if (wnd.kbd.KeyIsPressed('A'))
 	{
 		m_player.moveStep(RENDERER::Movement::STRAFE_LEFT, timePassed);

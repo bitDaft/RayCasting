@@ -52,7 +52,13 @@ private:
 	RENDERER m_player;
 	int mouseX;
 	int tempX;
+	int tempY;
 	RECT rr;
+
+	HWND hwnd;
+	POINT pt,pt2;
+
+	bool captureMouse = false;
 
 	std::chrono::system_clock::time_point tp1;
 	std::chrono::system_clock::time_point tp2;

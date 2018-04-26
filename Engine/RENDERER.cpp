@@ -63,7 +63,7 @@ void RENDERER::render(Graphics & gfx)
 {
 	double rayAngle = 0.0;
 	const double fovUnit = (m_FOV / double(Graphics::ScreenWidth));
-	const double stepSize = 0.01;
+	const double stepSize = 0.1;
 
 	for (int x = 0; x < Graphics::ScreenWidth; x++)
 	{
@@ -90,7 +90,7 @@ void RENDERER::render(Graphics & gfx)
 				for (int tx = 0; tx < 2; tx++)
 					for (int ty = 0; ty < 2; ty++)
 					{
-						VECTOR2D pToEdge = edgePos + VECTOR2D((double)tx-0.005, (double)ty-0.005) - m_pos;
+						VECTOR2D pToEdge = edgePos + VECTOR2D((double)tx-0.0005, (double)ty-0.0005) - m_pos;
 						double tempD = pToEdge.getDistance();
 						if ((tempD >= (distance-0.5)) && (tempD <= (distance + 0.5)))
 						{		
@@ -131,7 +131,7 @@ void RENDERER::render(Graphics & gfx)
 				/*
 				as distance decreased the multiplier increases 63 * mult;mult start from 1/5;
 				*/
-				if (isEdge) pp = 0;
+				if (isEdge || y > floorStart-2) pp = 0;
 				
 				gfx.PutPixel(x, y, Colors::MakeRGB(pp, pp, pp));
 				
@@ -139,9 +139,11 @@ void RENDERER::render(Graphics & gfx)
 			else
 			{
 				double pp = y - Graphics::ScreenHeight / 2.2;
+				pp *= 2.0;
+
 				if (pp < 0) pp = 0.0;
 				if (pp > 255) pp = 255.0;
-				pp *= 2.0;
+				
 				double r = (79*pp)/255;// 0-176
 				double g = (30*pp)/255;
 				double b = (1*pp)/255;
@@ -153,7 +155,7 @@ void RENDERER::render(Graphics & gfx)
 }
 
 RENDERER::RENDERER(MAP & map)
-	:m_pos(8.0,8.0),m_velMovement(3.5),m_level(map),m_viewAngle(0.0),m_FOV(45*(pi / 180)),m_velRotate(1.5)
+	:m_pos(8.0,8.0),m_velMovement(3.5),m_level(map),m_viewAngle(0.0),m_FOV(35*(pi / 180)),m_velRotate(1.5)
 {
 }
 
