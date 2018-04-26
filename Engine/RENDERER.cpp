@@ -63,7 +63,7 @@ void RENDERER::render(Graphics & gfx)
 {
 	double rayAngle = 0.0;
 	const double fovUnit = (m_FOV / double(Graphics::ScreenWidth));
-	const double stepSize = 0.1;
+	const double stepSize = 0.01;
 
 	for (int x = 0; x < Graphics::ScreenWidth; x++)
 	{
@@ -74,6 +74,8 @@ void RENDERER::render(Graphics & gfx)
 		bool hitWall = false;
 		double distance = 0.0;
 
+		bool isEdge = false;
+
 		while (!hitWall)
 		{
 			distance += stepSize;
@@ -83,8 +85,26 @@ void RENDERER::render(Graphics & gfx)
 			if (m_level.getMapPosChar((int)pos.getX(), (int)pos.getY()) == L'#')
 			{
 				hitWall = true;
+				VECTOR2D edgePos = VECTOR2D((int)pos.getX(),(int)pos.getY());
+
+				for (int tx = 0; tx < 2; tx++)
+					for (int ty = 0; ty < 2; ty++)
+					{
+						VECTOR2D pToEdge = edgePos + VECTOR2D((double)tx-0.005, (double)ty-0.005) - m_pos;
+						double tempD = pToEdge.getDistance();
+						if ((tempD >= (distance-0.5)) && (tempD <= (distance + 0.5)))
+						{		
+							if (acos(uRay.Dot(pToEdge.getUnitVector())) < 0.001)
+							{
+								isEdge = true;
+								goto jmp;
+							}
+						}
+					}
+			jmp:;
 			}
 		}
+		
 
 		int CeilingEnd = (int)((Graphics::ScreenHeight / 2.0) - (Graphics::ScreenHeight / distance));
 		int floorStart = Graphics::ScreenHeight - CeilingEnd;
@@ -97,22 +117,43 @@ void RENDERER::render(Graphics & gfx)
 			}
 			else if (y <= floorStart )
 			{
-				
-					unsigned char pp = std::min(255,int((255 / distance) * 5));
+				int pp;// = std::min(255, int((255 / distance) * 2.5));
 
-					gfx.PutPixel(x, y, Colors::MakeRGB(pp, pp, pp));
+				pp = int(63 / (distance /35));
+				if (pp < 0)pp = 0;
+				if (pp > 255)pp = 255;
+				/*if (distance > 18) pp = 63/2;
+				else if (distance > 16) pp = 63;
+				else if (distance > 14) pp = 63 * 2;
+				else if (distance > 11) pp = 63 * 2.5;
+				else if (distance > 8) pp = 63 * 3;
+				else pp = 212;*/
+				/*
+				as distance decreased the multiplier increases 63 * mult;mult start from 1/5;
+				*/
+				if (isEdge) pp = 0;
+				
+				gfx.PutPixel(x, y, Colors::MakeRGB(pp, pp, pp));
 				
 			}
 			else
 			{
-				gfx.PutPixel(x, y, Colors::MakeRGB(0,255,0));
+				double pp = y - Graphics::ScreenHeight / 2.2;
+				if (pp < 0) pp = 0.0;
+				if (pp > 255) pp = 255.0;
+				pp *= 2.0;
+				double r = (79*pp)/255;// 0-176
+				double g = (30*pp)/255;
+				double b = (1*pp)/255;
+				
+				gfx.PutPixel(x, y, Colors::MakeRGB((unsigned char)r, (unsigned char)g, (unsigned char)b));
 			}
 		}
 	}
 }
 
 RENDERER::RENDERER(MAP & map)
-	:m_pos(8.0,8.0),m_velMovement(3.2),m_level(map),m_viewAngle(0.0),m_FOV(40*(pi / 180)),m_velRotate(1.0)
+	:m_pos(8.0,8.0),m_velMovement(3.5),m_level(map),m_viewAngle(0.0),m_FOV(45*(pi / 180)),m_velRotate(1.5)
 {
 }
 

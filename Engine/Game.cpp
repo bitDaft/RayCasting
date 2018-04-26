@@ -29,24 +29,40 @@ Game::Game( MainWindow& wnd )
 	m_player(m_map)
 {
 	std::wstring floorLayout;
-	const int dim = 16;
+	const int dim = 32;
 
-	floorLayout += L"################";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#.....#........#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"#......#########";
-	floorLayout += L"#..............#";
-	floorLayout += L"#..............#";
-	floorLayout += L"################";
+	floorLayout += L"################################";
+	floorLayout += L"#..........#..........#........#";
+	floorLayout += L"#..........#..........#........#";
+	floorLayout += L"#..........#..........#........#";
+	floorLayout += L"#..........#..........#........#";
+	floorLayout += L"#..........#..........#........#";
+	floorLayout += L"#..........#..........#........#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#.................###########..#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#.#########....................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#........................##....#";
+	floorLayout += L"#........................##....#";
+	floorLayout += L"#........................##....#";
+	floorLayout += L"#........................##....#";
+	floorLayout += L"#......#######...........##....#";
+	floorLayout += L"#......#######...........##....#";
+	floorLayout += L"#......#######...........##....#";
+	floorLayout += L"#......#######...........##....#";
+	floorLayout += L"#......#######...........##....#";
+	floorLayout += L"#........................##....#";
+	floorLayout += L"#........................##....#";
+	floorLayout += L"#........................##....#";
+	floorLayout += L"################################";
+	
 	m_map = MAP(floorLayout, dim);
 	tp1 = tp2 = std::chrono::system_clock::now();
 	mouseX = 0;
