@@ -30,7 +30,7 @@ private:
 
 public:
 
-	bool DrawMap = false;
+	bool DrawMap = true;
 
 	void moveStep(Movement mov,double frameTime);
 	void render(Graphics& gfx);

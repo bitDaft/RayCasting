@@ -33,35 +33,36 @@ Game::Game( MainWindow& wnd )
 	const int dim = 32;
 
 	floorLayout += L"################################";
-	floorLayout += L"#..........#..........#........#";
-	floorLayout += L"#..........#..........#........#";
-	floorLayout += L"#..........#..........#........#";
-	floorLayout += L"#..........#..........#........#";
-	floorLayout += L"#..........#..........#........#";
-	floorLayout += L"#..........#..........#........#";
-	floorLayout += L"#..............................#";
-	floorLayout += L"#..............................#";
-	floorLayout += L"#.................##############";
 	floorLayout += L"#..............................#";
 	floorLayout += L"#..............................#";
 	floorLayout += L"#..............................#";
-	floorLayout += L"#......................##......#";
-	floorLayout += L"#......................##......#";
-	floorLayout += L"###########....................#";
-	floorLayout += L"#.........#....................#";
-	floorLayout += L"#.........#....................#";
-	floorLayout += L"#.........#..............##....#";
-	floorLayout += L"#.........#..............##....#";
-	floorLayout += L"#.........#..............##....#";
-	floorLayout += L"#........................##....#";
-	floorLayout += L"#.................###....##....#";
-	floorLayout += L"#.................###....##....#";
-	floorLayout += L"#.................###....##....#";
-	floorLayout += L"#........................##....#";
-	floorLayout += L"#.......###################....#";
-	floorLayout += L"#........................##....#";
-	floorLayout += L"#........................##....#";
-	floorLayout += L"#........................##....#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#........#..............#......#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#......##......................#";
+	floorLayout += L"#......##......................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#....................###.......#";
+	floorLayout += L"#....................###.......#";
+	floorLayout += L"#....................###.......#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#..............................#";
+	floorLayout += L"#.....................##.......#";
+	floorLayout += L"#########.............##.......#";
+	floorLayout += L"#.....................##.......#";
+	floorLayout += L"#.....................##.......#";
+	floorLayout += L"#.....................##.......#";
+	floorLayout += L"#.....................##.......#";
 	floorLayout += L"################################";
 	
 	m_map = MAP(floorLayout, dim);
@@ -69,8 +70,10 @@ Game::Game( MainWindow& wnd )
 	mouseX = 0;
 	hwnd = FindWindowW(NULL, L"FakeRay");
 	assert(hwnd != NULL);
-	pt.x = 1366 / 2;
-	pt.y = 768 / 2;
+	pt.x = 800 / 2;
+	pt.y = 600 / 2;
+	ClientToScreen(hwnd, &pt);
+	SetCursorPos(pt.x, pt.y);
 	
 }
 
@@ -93,7 +96,7 @@ void Game::UpdateModel(double timePassed)
 	if (captureMouse)
 	{
 		
-		double val = 2.0;
+		double val = 15.0;
 		 
 		int dir = 0;
 		tempX = wnd.mouse.GetPosX();
@@ -115,7 +118,7 @@ void Game::UpdateModel(double timePassed)
 		
 		SetCursorPos(pt.x, pt.y);
 	}
-	if (wnd.kbd.KeyIsPressed('P'))
+	/*if (wnd.kbd.KeyIsPressed('P'))
 	{
 		captureMouse = !captureMouse;
 		tempX = wnd.mouse.GetPosX();
@@ -124,7 +127,7 @@ void Game::UpdateModel(double timePassed)
 		pt.y = tempY;
 		ClientToScreen(hwnd, &pt);
 		SetCursorPos(pt.x, pt.y);		
-	}
+	}*/
 	if (wnd.kbd.KeyIsPressed('A'))
 	{
 		m_player.moveStep(RENDERER::Movement::STRAFE_LEFT, timePassed);
@@ -141,9 +144,13 @@ void Game::UpdateModel(double timePassed)
 	{
 		m_player.moveStep(RENDERER::Movement::BACKWARD, timePassed);
 	}
-	if (wnd.kbd.KeyIsPressed('O'))
+	if (wnd.kbd.KeyIsPressed('Q'))
 	{
 		wnd.Kill();
+	}
+	if (wnd.kbd.KeyIsPressed('M'))
+	{
+		m_player.DrawMap = !m_player.DrawMap;
 	}
 	
 }

@@ -152,10 +152,13 @@ void RENDERER::render(Graphics & gfx)
 			}
 		}
 	}
+
+	if (DrawMap)
+		m_level.Draw(10, 10, m_pos.getX(), m_pos.getY(), m_viewAngle, gfx);
 }
 
 RENDERER::RENDERER(MAP & map)
-	:m_pos(8.0,8.0),m_velMovement(3.5),m_level(map),m_viewAngle(0.0),m_FOV(35*(pi / 180)),m_velRotate(1.5)
+	:m_pos(16.0,16.0),m_velMovement(3.5),m_level(map),m_viewAngle(0.0),m_FOV(35*(pi / 180)),m_velRotate(1.5)
 {
 }
 

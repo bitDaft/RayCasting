@@ -58,7 +58,7 @@ private:
 	HWND hwnd;
 	POINT pt,pt2;
 
-	bool captureMouse = false;
+	bool captureMouse = true;
 
 	std::chrono::system_clock::time_point tp1;
 	std::chrono::system_clock::time_point tp2;
