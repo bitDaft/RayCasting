@@ -26,9 +26,10 @@
 
 #include "MAP.h"
 #include "RENDERER.h"
+#include "OBJECTS.h"
 
 #include <chrono>
-
+#include <list>
 
 class Game
 {
@@ -50,9 +51,10 @@ private:
 	/*  User Variables              */
 	MAP m_map;
 	RENDERER m_player;
+
+	std::list<STATIC_OBJECTS> m_obj;
+
 	int mouseX;
-	int tempX;
-	int tempY;
 	RECT rr;
 
 	HWND hwnd;

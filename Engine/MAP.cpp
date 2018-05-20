@@ -35,19 +35,19 @@ void MAP::Draw(int offsetX, int offsetY, double pX, double pY, double A, Graphic
 	pY = (int)pY;
 	pX *= 5;
 	pY *= 5;
-	for (int i = -1; i < 2; i++)
-		for (int j = -1; j < 2; j++)
-			gfx.PutPixel(offsetX + pX + pxx + i, offsetY + pY + pyy + j, Colors::Red);
+	for (int i = -1; i < 1; i++)
+		for (int j = -1; j < 1; j++)
+			gfx.PutPixel(int(offsetX + pX + pxx + i), int(offsetY + pY + pyy + j), Colors::Red);
 
 	double xx = cos(A) * 0.3;
 	double yy = sin(A) * 0.3;
 	xx *= 5;
 	yy *= 5;
 		
-	gfx.PutPixel(offsetX + xx * 2 + pX + pxx, offsetY + yy * 2 + pY + pyy, Colors::Green);
-	gfx.PutPixel(offsetX + xx * 4 + pX + pxx, offsetY + yy * 4 + pY + pyy, Colors::Green);
-	gfx.PutPixel(offsetX + xx * 6 + pX + pxx, offsetY + yy * 6 + pY + pyy, Colors::Green);
-	gfx.PutPixel(offsetX + xx * 8 + pX + pxx, offsetY + yy * 8 + pY + pyy, Colors::Green);
+	gfx.PutPixel(int(offsetX + xx * 2 + pX + pxx), int(offsetY + yy * 2 + pY + pyy), Colors::Green);
+	gfx.PutPixel(int(offsetX + xx * 4 + pX + pxx), int(offsetY + yy * 4 + pY + pyy), Colors::Green);
+	gfx.PutPixel(int(offsetX + xx * 6 + pX + pxx), int(offsetY + yy * 6 + pY + pyy), Colors::Green);
+	gfx.PutPixel(int(offsetX + xx * 8 + pX + pxx), int(offsetY + yy * 8 + pY + pyy), Colors::Green);
 	
 }
 

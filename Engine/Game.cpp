@@ -29,6 +29,11 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	m_player(m_map)
 {
+	for (char i = 0; i < 3; i++)
+	{
+		m_obj.push_back(STATIC_OBJECTS({ 6.0*(double)(i + 1), 6.0*(double)(i + 1) }, 400, 400));
+	}
+	
 	std::wstring floorLayout;
 	const int dim = 32;
 
@@ -66,6 +71,7 @@ Game::Game( MainWindow& wnd )
 	floorLayout += L"################################";
 	
 	m_map = MAP(floorLayout, dim);
+
 	tp1 = tp2 = std::chrono::system_clock::now();
 	mouseX = 0;
 	hwnd = FindWindowW(NULL, L"FakeRay");
@@ -74,7 +80,7 @@ Game::Game( MainWindow& wnd )
 	pt.y = 600 / 2;
 	ClientToScreen(hwnd, &pt);
 	SetCursorPos(pt.x, pt.y);
-	
+	ShowCursor(false);
 }
 
 void Game::Go()
@@ -95,25 +101,23 @@ void Game::UpdateModel(double timePassed)
 
 	if (captureMouse)
 	{
-		
-		double val = 15.0;
 		 
 		int dir = 0;
-		tempX = wnd.mouse.GetPosX();
-		tempY = wnd.mouse.GetPosY();
-		pt2.x = tempX;
-		pt2.y = tempY;
+		pt2.x = wnd.mouse.GetPosX();
+		//tempY = wnd.mouse.GetPosY();
+		//pt2.x = tempX;
+		//pt2.y = tempY;
 		ClientToScreen(hwnd, &pt2);
 		
 		dir = pt2.x - pt.x;
 
 		if (dir < 0)
 		{
-			m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, (abs(dir) / val) * timePassed);
+			m_player.moveStep(RENDERER::Movement::ROTATE_LEFT, (abs(dir) / 12.0) * timePassed);
 		}
 		else if (dir > 0)
 		{
-			m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT, (abs(dir) / val) * timePassed);
+			m_player.moveStep(RENDERER::Movement::ROTATE_RIGHT, (abs(dir) / 12.0) * timePassed);
 		}
 		
 		SetCursorPos(pt.x, pt.y);
@@ -157,5 +161,5 @@ void Game::UpdateModel(double timePassed)
 
 void Game::ComposeFrame()
 {
-	m_player.render(gfx);
+	m_player.render(gfx,m_obj);
 }

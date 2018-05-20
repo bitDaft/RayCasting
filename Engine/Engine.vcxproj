@@ -147,6 +147,7 @@
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="MAP.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="OBJECTS.h" />
     <ClInclude Include="RENDERER.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sound.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MAP.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="OBJECTS.cpp" />
     <ClCompile Include="RENDERER.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="VECTOR.cpp" />

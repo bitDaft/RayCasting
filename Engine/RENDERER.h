@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Graphics.h"
+#include "OBJECTS.h"
 
 #include "VECTOR.h"
 #include "MAP.h"
+#include <list>
 
 class RENDERER
 {
@@ -28,12 +30,14 @@ private:
 
 	const MAP& m_level;
 
+	double zbuf[Graphics::ScreenWidth];
+
 public:
 
 	bool DrawMap = true;
 
 	void moveStep(Movement mov,double frameTime);
-	void render(Graphics& gfx);
+	void render(Graphics& gfx, std::list<STATIC_OBJECTS> oo);
 
 	RENDERER() = delete;
 	RENDERER(MAP& map);
