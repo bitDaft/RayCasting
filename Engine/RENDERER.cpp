@@ -9,7 +9,7 @@
 struct objr
 {
 	double dist;
-	unsigned short ang;
+	short ang;
 };
 
 void RENDERER::moveStep(Movement mov, double frameTime)
@@ -181,11 +181,11 @@ void RENDERER::render(Graphics & gfx,std::list<STATIC_OBJECTS> oo)
 		if (ang > pi)
 			ang -= 2.0 * pi;
 
-		bool bInFOV = fabs(ang) < ((m_FOV + 10.0) / 2.0);
+		bool bInFOV = fabs(ang) < ((m_FOV / 2.0)+0.3);
 
 		if (bInFOV && po.getDistance() > 1.0)
 		{
-			unsigned short locx = (int)(((0.5 * (-ang / (m_FOV / 2.0))) + 0.5) * (double)Graphics::ScreenWidth);
+			short locx = (int)(((0.5 * (-ang / ((m_FOV / 2.0)))) + 0.5) * (double)Graphics::ScreenWidth);
 			a.push_back(std::pair< STATIC_OBJECTS&, const objr>(obj, { po.getDistance() ,locx }));
 			//obj.Draw(gfx, locx, po.getDistance(), zbuf);
 		}

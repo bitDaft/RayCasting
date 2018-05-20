@@ -12,7 +12,7 @@ private:
 
 public:
 	VECTOR2D pos;
-	void Draw(Graphics &gfx, unsigned short x, double dist, double *buf);
+	void Draw(Graphics &gfx, short x, double dist, double *buf);
 
 	STATIC_OBJECTS() ;
 	STATIC_OBJECTS& operator=(const STATIC_OBJECTS&) = default;
